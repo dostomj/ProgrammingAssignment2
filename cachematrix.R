@@ -2,8 +2,10 @@
 ## functions do
 
 ## Write a short comment describing this function
-## makeCacheMatrix is the class that exposes 
+
+## crteates a wrapper for the matrix with the capability to cache the inverse  
 makeCacheMatrix <- function(x = matrix()) {
+  
   ## initialize the inverse to null
   i <- NULL
   
@@ -34,23 +36,16 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
-  m <- x$getinverse()
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
+  i <- x$getinverse()
+  if(!is.null(i)) {
+    message("getting inverse from cached data")
+    return(i)
   }
-}
-
-
-cachemean <- function(x, ...) {
-  m <- x$getmean()
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
+  
   data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
-  m
+  i <- solve(data, ...)
+  x$setinverse(i)
+  i
 }
+
 
